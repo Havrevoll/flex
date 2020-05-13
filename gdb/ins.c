@@ -3,7 +3,6 @@
 // usage: insert_sort num1 num2 num3 ..., where the numi are the numbers to
 // be sorted
 //
-//
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +10,6 @@ int x[10], // input array
     y[10], // workspace array
     num_inputs,  //length of input array
     num_y = 0; // current number of elements in y
-
 void get_args(int ac, char ** av)
 { int i;
 	num_inputs = ac - 1;
@@ -21,13 +19,15 @@ void get_args(int ac, char ** av)
 
 void scoot_over(int jj)
 { int k;
-	for (k = num_y-1; k > jj; k++)
+
+	for (k = num_y; k > jj; k--)
 		y[k] = y[k-1];
 }
 
 void insert(int new_y)
 { int j;
-	if (num_y = 0) { // y empty so far, easy case
+
+	if (num_y == 0) { // y empty so far, easy case
 		y[0] = new_y;
 		return;
 	}
@@ -42,6 +42,8 @@ void insert(int new_y)
 			return;
 		}
 	}
+	// one more case: new_y > all existing y elements
+	y[num_y] = new_y;
 }
 
 void process_data()
@@ -50,7 +52,6 @@ void process_data()
 		// insert new y in the proper place
 		// among y[0],...,y[num_y-1]
 		insert(x[num_y]);
-
 }
 
 void print_results()
