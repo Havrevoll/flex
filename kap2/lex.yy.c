@@ -1943,7 +1943,11 @@ lookup(char* sym)
 
   while(--scount >= 0) {
     nprobe++;
-    if(sp->name && !strcmp(sp->name, sym)) { nold++; return sp; }
+    if(sp->name && !strcmp(sp->name, sym)) 
+      { 
+        nold++; 
+        return sp; 
+      }
 
     if(!sp->name) {		/* new entry */
       nnew++;
@@ -1952,7 +1956,9 @@ lookup(char* sym)
       return sp;
     }
 
-    if(++sp >= symtab+NHASH) sp = symtab; /* try the next entry */
+    if(++sp >= symtab+NHASH) {
+      sp = symtab; /* try the next entry */
+    }
   }
   fputs("symbol table overflow\n", stderr);
   abort(); /* tried them all, table is full */
@@ -1967,10 +1973,15 @@ addref(int lineno, char *filename, char *word, int flags)
 
   /* don't do dups */
   if(sp->reflist &&
-     sp->reflist->lineno == lineno && sp->reflist->filename == filename) return;
+     sp->reflist->lineno == lineno && sp->reflist->filename == filename) {
+       return;
+  }
 
   r = malloc(sizeof(struct ref));
-  if(!r) {fputs("out of space\n", stderr); abort(); }
+  if(!r) {
+    fputs("out of space\n", stderr); 
+    abort(); 
+  }
   r->next = sp->reflist;
   r->filename = filename;
   r->lineno = lineno;
@@ -1992,10 +2003,14 @@ symcompare(const void *xa, const void *xb)
   const struct symbol *b = xb;
 
   if(!a->name) {
-    if(!b->name) return 0;	/* both empty */
+    if(!b->name) {
+      return 0;	/* both empty */
+    }
     return 1;			/* put empties at the end */
   }
-  if(!b->name) return -1;
+  if(!b->name) {
+    return -1;
+  }
   return strcmp(a->name, b->name);
 }
 
