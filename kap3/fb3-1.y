@@ -22,7 +22,7 @@ calclist: /* nothing */
 | calclist exp EOL {
 	printf("= %4.4g\n", eval($2));
 	treefree($2);
-	printf(("> ");
+	printf("> ");
 }
 
 | calclist EOL { printf("> "); } /* blank line or a comment */
@@ -39,7 +39,7 @@ factor: term
 ;
 
 term: NUMBER { $$ = newnum($1); }
-| '|' term { $$ = newast('|', 2, NULL); }
+| '|' term { $$ = newast('|', $2, NULL); }
 | '(' exp ')' { $$ = $2; }
 | '-' term { $$ = newast('M', $2, NULL); }
 ;
