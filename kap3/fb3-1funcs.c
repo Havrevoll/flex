@@ -79,7 +79,7 @@ void yyerror(char *s, ...)
 	va_start(ap, s);
 
 	fprintf(stderr, "%d: error: ", yylineno);
-	vprintf(stderr, s, ap);
+	vfprintf(stderr, s, ap);
 	fprintf(stderr, "\n");
 }
 
