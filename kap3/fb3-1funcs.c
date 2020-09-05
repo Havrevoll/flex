@@ -2,6 +2,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include "fb3-1.h"
+# include "fb3-1.tab.h"
 
 struct ast * newast(int nodetype, struct ast *l, struct ast *r)
 {
