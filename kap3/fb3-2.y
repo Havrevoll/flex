@@ -41,4 +41,10 @@ stmt: IF exp THEN list           { $$ = newflow('I', $2, $4, NULL); }
 
 list: /* nothing */  { $$ = NULL; }
    | stmt ';' list { if ($3 == NULL)
-                        
+                        $$ = $1;
+                     else
+                        $$ = newast('L', $1, $3);
+                   }
+;
+
+
